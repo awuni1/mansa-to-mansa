@@ -141,13 +141,15 @@ export default function Page () {
 
             {/* Main nav */}
             <div className="flex flex-col lg:flex-row items-center px-2 sm:px-6 py-2 sm:py-4 md:flex-row">
-           <Link href="/"> <Image
+           <Link href="/" className="cursor-pointer hover:opacity-80 transition-opacity">
+                <Image
                 src={theme === 'light' ? '/logo2.png' : '/logo.png'}
                 width={200}
                 height={100}
-                //className="block mb-0 ml-[-200] lg:mb-0 w-24 sm:w-32 md:w-48 lg:w-auto lg:ml-0 md:ml-0"
-                alt="logo"
-                /></Link>
+                className="block mb-0 w-24 sm:w-32 md:w-48 lg:w-auto cursor-pointer"
+                alt="Mansa-to-Mansa logo"
+                />
+           </Link>
 
               {/* Desktop nav */}
               <nav className="hidden lg:flex flex-grow justify-center  ">
@@ -170,12 +172,23 @@ export default function Page () {
                       }`}
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <button
-                        onClick={() => setIsOpen(false)}
-                        className=" text-2xl mb-6  dark:text-white text-black"
-                      >
-                        <IoClose />
-                      </button>
+                      <div className="flex justify-between items-center mb-6">
+                        <Link href="/" onClick={() => setIsOpen(false)}>
+                          <Image
+                            src={theme === 'light' ? '/logo2.png' : '/logo.png'}
+                            width={150}
+                            height={75}
+                            alt="Mansa-to-Mansa logo"
+                            className="cursor-pointer"
+                          />
+                        </Link>
+                        <button
+                          onClick={() => setIsOpen(false)}
+                          className="text-2xl dark:text-white text-black"
+                        >
+                          <IoClose />
+                        </button>
+                      </div>
                       <nav>
                         <ul className="space-y-4  dark:text-white text-black">
                           <li><Link href="/" onClick={() => setIsOpen(false)}>HOME</Link></li>

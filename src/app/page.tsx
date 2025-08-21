@@ -53,7 +53,7 @@ export default function Page() {
 
           {/* Main nav */}
           <div className="flex flex-col lg:flex-row items-center px-2 sm:px-6 py-2 sm:py-4 md:flex-row">
-            <Image
+          <Image
               src={mounted && theme === 'light' ? '/logo2.png' : '/logo.png'}
               width={150}
               height={75}
@@ -113,7 +113,7 @@ export default function Page() {
             <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mt-2 sm:mt-4 leading-tight max-w-4xl">
               Building the Future, One Mansa at a Time
             </h1>
-            <div className='mb-5'>
+            <div className='text-xs sm:text-sm md:text-base lg:text-lg'>
               Connecting African students worldwide through mentorship, networking, collaboration,
               <br />
                and shared opportunities.

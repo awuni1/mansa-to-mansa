@@ -244,7 +244,7 @@ import '../../styles/globals.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import ScrollToTopButton from '@/components/ScrollToTopButton';
-import { IoMenu, IoClose, IoRocketSharp, IoPersonAdd, IoCheckmarkCircle, IoWarning, IoGlobe, IoCalendar, IoSettings, IoMail, IoBriefcase } from 'react-icons/io5';
+import { IoMenu, IoClose, IoRocketSharp, IoPersonAdd, IoCheckmarkCircle, IoWarning, IoGlobe, IoCalendar, IoMail, IoBriefcase } from 'react-icons/io5';
 import { useTheme } from 'next-themes';
 import { ongoingProjects, futureProjects } from '@/constants/projectsData';
 import { Project, FutureProject } from '@/types/projects';
@@ -956,7 +956,6 @@ const ProjectsPage: React.FC = () => {
                   <li><Link href="/team" onClick={() => setIsOpen(false)} className="text-base hover:text-gray-300 transition-colors">TEAM</Link></li>
                   <li><Link href="/community" onClick={() => setIsOpen(false)} className="text-base hover:text-gray-300 transition-colors">COMMUNITY</Link></li>
                   <li><Link href="/projects" onClick={() => setIsOpen(false)} className="text-base hover:text-gray-300 transition-colors text-[#3FB950]">PROJECTS</Link></li>
-                  <li><Link href="/admin" onClick={() => setIsOpen(false)} className="text-base hover:text-gray-300 transition-colors flex items-center space-x-2"><IoSettings size={16} /><span>Admin</span></Link></li>
                 </ul>
                 <button
                   onClick={() => setIsOpen(false)}
