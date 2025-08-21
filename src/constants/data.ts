@@ -170,7 +170,7 @@ const teamMembers = [
     id: 1,
     name: "Fayick Suleman",
     position: "Founder",
-    image: "/mrFayick2.jpg?height=712&width=640",
+    image: "/mrfayick2.jpg?height=712&width=640",
     socialLinks: {
       instagram: "https://www.instagram.com/virulent1?igsh=ajV6cDMyNWFuOHVx&utm_source=qr",
       twitter: "https://x.com/virulent1?s=21&t=0UUhoMbTebN88YO0KsTLUg",
