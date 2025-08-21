@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 10s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Professional Typography */
+  .text-hero {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    line-height: var(--line-height-tight);
+    font-weight: 700;
+  }
+
+  .text-section-title {
+    font-size: clamp(1.25rem, 3vw, 2.5rem);
+    line-height: var(--line-height-snug);
+    font-weight: 600;
+  }
+
+  .text-card-title {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    line-height: var(--line-height-normal);
+    font-weight: 600;
+  }
+
+  .text-body {
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .text-small {
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
+    line-height: var(--line-height-normal);
+  }
+
+  /* Professional spacing */
+  .section-padding {
+    padding: clamp(2rem, 8vw, 6rem) clamp(1rem, 4vw, 4rem);
+  }
+
+  .container-responsive {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 4vw, 2rem);
+  }
+
+  /* Consistent shadows */
+  .shadow-professional {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-professional-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+
+
+@theme {
+  --breakpoint-mobile375: 375px;
+  --breakpoint-mobile425: 425px;
+  
+  /* Typography Scale */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  
+  /* Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  
+  /* Spacing Scale */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+}
+
+/* then add custom variants */
+@custom-variant mobile375 (@media (min-width: 375px));
+@custom-variant mobile425 (@media (min-width: 425px));
+
+
+
