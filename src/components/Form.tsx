@@ -90,7 +90,7 @@ export default function BecomeMemberForm() {
   const inputStyle =
     'w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg sm:rounded-xl dark:bg-gray-800/50 bg-gray-50 dark:text-white text-gray-900 border border-gray-200 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#3FB950] focus:border-transparent transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700/70';
 
-  const iconStyle = 'absolute left-2.5 sm:left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 text-sm sm:text-base';
+  const iconStyle = 'absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 text-sm sm:text-base';
 
   return (
     <>
@@ -187,7 +187,7 @@ export default function BecomeMemberForm() {
                     placeholder="Full Name *"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`${inputStyle} pl-10`}
+                    className={`${inputStyle} pl-11 sm:pl-12`}
                     required
                   />
                 </div>
@@ -199,7 +199,7 @@ export default function BecomeMemberForm() {
                     placeholder="Email Address *"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`${inputStyle} pl-10`}
+                    className={`${inputStyle} pl-11 sm:pl-12`}
                     required
                   />
                 </div>
@@ -221,7 +221,7 @@ export default function BecomeMemberForm() {
                     placeholder="Phone Number *"
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`${inputStyle} pl-10`}
+                    className={`${inputStyle} pl-11 sm:pl-12`}
                     required
                   />
                 </div>
@@ -233,7 +233,7 @@ export default function BecomeMemberForm() {
                     placeholder="Country *"
                     value={formData.country}
                     onChange={handleChange}
-                    className={`${inputStyle} pl-10`}
+                    className={`${inputStyle} pl-11 sm:pl-12`}
                     required
                   />
                 </div>
@@ -245,7 +245,7 @@ export default function BecomeMemberForm() {
                     placeholder="City *"
                     value={formData.city}
                     onChange={handleChange}
-                    className={`${inputStyle} pl-10`}
+                    className={`${inputStyle} pl-11 sm:pl-12`}
                     required
                   />
                 </div>
@@ -259,7 +259,7 @@ export default function BecomeMemberForm() {
                     placeholder="LinkedIn Profile (Optional)"
                     value={formData.linkedin}
                     onChange={handleChange}
-                    className={`${inputStyle} pl-10`}
+                    className={`${inputStyle} pl-11 sm:pl-12`}
                   />
                 </div>
               </div>
