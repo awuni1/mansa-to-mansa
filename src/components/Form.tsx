@@ -60,6 +60,29 @@ export default function BecomeMemberForm() {
       return;
     }
 
+    // Dynamic import to avoid SSR issues
+    const { supabase } = await import('@/lib/supabase');
+
+    // Check if email already exists
+    const { data: existingUser, error: checkError } = await supabase
+      .from('members')
+      .select('email')
+      .eq('email', formData.email)
+      .single();
+
+    if (checkError && checkError.code !== 'PGRST116') {
+      console.error('Email check error:', checkError);
+      setError('Something went wrong. Please try again.');
+      setLoading(false);
+      return;
+    }
+
+    if (existingUser) {
+      setError('Email already exists');
+      setLoading(false);
+      return;
+    }
+
     const cleanedFormData = Object.fromEntries(
       Object.entries(formData).filter(([, v]) => v !== '' && v !== undefined)
     );
@@ -70,8 +93,6 @@ export default function BecomeMemberForm() {
       gender,
     };
 
-    // Dynamic import to avoid SSR issues
-    const { supabase } = await import('@/lib/supabase');
     const { error: insertError } = await supabase.from('members').insert([submissionData]);
 
     if (insertError) {
@@ -537,7 +558,7 @@ export default function BecomeMemberForm() {
                     </h1>
                     
                     <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed px-2 sm:px-0">
-                      You&apos;re officially part of our community. Join WhatsApp to connect with 1000+ members.
+                      You&apos;re officially part of our community. Join WhatsApp to connect with  members.
                     </p>
                   </div>
 
@@ -565,7 +586,7 @@ export default function BecomeMemberForm() {
                     <div className="flex items-center justify-center gap-2 sm:gap-3">
                       <div className="flex items-center gap-1">
                         <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                        <span className="text-[10px] sm:text-xs text-gray-400">1000+ Active</span>
+                        <span className="text-[10px] sm:text-xs text-gray-400">Active</span>
                       </div>
                       <span className="text-gray-300 dark:text-gray-600">•</span>
                       <span className="text-[10px] sm:text-xs text-gray-400">24/7 Support</span>
