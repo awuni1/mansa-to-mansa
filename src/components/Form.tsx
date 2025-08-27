@@ -95,16 +95,7 @@ export default function BecomeMemberForm() {
   return (
     <>
       <style>{`
-        .text-orientation-fix * {
-          writing-mode: horizontal-tb !important;
-          text-orientation: mixed !important;
-          direction: ltr !important;
-          unicode-bidi: normal !important;
-          -webkit-writing-mode: horizontal-tb !important;
-          -webkit-text-orientation: mixed !important;
-          -moz-writing-mode: horizontal-tb !important;
-          -ms-writing-mode: horizontal-tb !important;
-        }
+        /* Removed problematic text-orientation-fix that was breaking layout */
         .floating-label {
           transition: all 0.3s ease;
         }
@@ -148,10 +139,112 @@ export default function BecomeMemberForm() {
             transform: translateY(0);
           }
         }
+
+        /* World-class modal animations */
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes bounce-gentle {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-5px);
+          }
+        }
+
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out forwards;
+        }
+
+        .animate-bounce-gentle {
+          animation: bounce-gentle 2s ease-in-out infinite;
+        }
+
+        .animate-spin-slow {
+          animation: spin-slow 8s linear infinite;
+        }
+
+        .delay-200 {
+          animation-delay: 0.2s;
+        }
+
+        .delay-300 {
+          animation-delay: 0.3s;
+        }
+
+        .delay-500 {
+          animation-delay: 0.5s;
+        }
+
+        .delay-700 {
+          animation-delay: 0.7s;
+        }
+
+        .delay-1000 {
+          animation-delay: 1s;
+        }
+
+        /* Modern Success Modal Animations */
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes scaleIn {
+          from {
+            transform: scale(0);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .animate-slideUp {
+          animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-scaleIn {
+          animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease;
+        }
       `}</style>
       
       <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex justify-center items-center py-4 sm:py-8 px-2 sm:px-4">
-        <div className="text-orientation-fix form-container p-4 sm:p-6 md:p-8 lg:p-12 rounded-xl sm:rounded-2xl shadow-2xl max-w-5xl w-full backdrop-blur-sm">
+        <div className="form-container p-4 sm:p-6 md:p-8 lg:p-12 rounded-xl sm:rounded-2xl shadow-2xl max-w-5xl w-full backdrop-blur-sm">
           {/* Header Section */}
           <div className="text-center mb-6 sm:mb-8 md:mb-12">
             <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-gradient-to-r from-[#3FB950] to-[#2EA043] rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
@@ -410,50 +503,78 @@ export default function BecomeMemberForm() {
             </div>
           </form>
 
-          {/* Success Modal */}
+          {/* Responsive Success Modal */}
           {showModal && (
-            <div className="fixed inset-0 flex items-center justify-center z-50 p-2 sm:p-4">
-              <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={() => setShowModal(false)}></div>
-              <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 z-50 max-w-md w-full relative transform animate-bounce">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 animate-fadeIn">
+              {/* Background */}
+              <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowModal(false)}></div>
+              
+              {/* Multi-Screen Responsive Modal Container */}
+              <div className="relative z-10 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-10  animate-slideUp border border-gray-100 dark:border-gray-800">
+                
+                {/* Multi-Screen Close Button */}
                 <button
-                  className="absolute top-2 right-2 sm:top-3 sm:right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-xl sm:text-2xl transition-colors p-1"
+                  className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 lg:top-5 lg:right-5 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 rounded-full bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 flex items-center justify-center group hover:scale-110"
                   onClick={() => setShowModal(false)}
                 >
-                  <IoClose />
+                  <IoClose className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-200" />
                 </button>
-                
+
+                {/* Multi-Screen Success Content */}
                 <div className="text-center">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
-                    <IoCheckmarkCircle className="text-2xl sm:text-3xl text-white" />
+                  {/* Responsive Success Icon */}
+                  <div className="relative mx-auto w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 mb-3 sm:mb-4 md:mb-5 lg:mb-6 animate-scaleIn">
+                    <div className="absolute inset-0 bg-green-400 rounded-full animate-ping opacity-20"></div>
+                    <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center w-full h-full shadow-md">
+                      <IoCheckmarkCircle className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white" />
+                    </div>
                   </div>
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-center mb-3 sm:mb-4 gradient-text px-2">
-                    🎉 Welcome to Mansa-to-Mansa!
-                  </h2>
-                  <p className="text-center text-gray-700 dark:text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed px-2">
-                    You&apos;re now part of our vibrant community! Join our WhatsApp group to connect with fellow members and stay updated.
-                  </p>
-                  
-                  <div className="space-y-3 sm:space-y-4">
+
+                  {/* Mobile-Responsive Welcome Message */}
+                  <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-5">
+                    <h1 className="text-base sm:text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent leading-tight">
+                      Welcome to Mansa! 🎉
+                    </h1>
+                    
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed px-2 sm:px-0">
+                      You&apos;re officially part of our community. Join WhatsApp to connect with 1000+ members.
+                    </p>
+                  </div>
+
+                  {/* Mobile-Responsive Action Buttons */}
+                  <div className="space-y-2">
+                    {/* Mobile-Optimized WhatsApp Button */}
                     <a
                       href="https://chat.whatsapp.com/ERMH6rdc1h52aTL6eib793"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full bg-green-500 hover:bg-green-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center space-x-2 text-sm sm:text-base"
+                      className="group block w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg transition-all duration-300 font-medium shadow-md hover:shadow-lg hover:-translate-y-0.5 text-sm sm:text-base active:scale-95"
                     >
-                      <span>📱</span>
-                      <span>Join WhatsApp Community</span>
+                      <span className="flex items-center justify-center gap-2">
+                        <span className="text-sm sm:text-base">💬</span>
+                        <span>Join WhatsApp</span>
+                      </span>
                     </a>
-                    
-                    <button
-                      onClick={() => setShowModal(false)}
-                      className="w-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 text-sm sm:text-base"
-                    >
-                      Continue Exploring
-                    </button>
+
+              
+
+                   
+
+                  {/* Mobile-Friendly Footer */}
+                  <div className="pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-gray-100 dark:border-gray-800">
+                    <div className="flex items-center justify-center gap-2 sm:gap-3">
+                      <div className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                        <span className="text-[10px] sm:text-xs text-gray-400">1000+ Active</span>
+                      </div>
+                      <span className="text-gray-300 dark:text-gray-600">•</span>
+                      <span className="text-[10px] sm:text-xs text-gray-400">24/7 Support</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
           )}
         </div>
       </main>

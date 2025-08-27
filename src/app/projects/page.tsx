@@ -464,16 +464,7 @@ const JoinProjectModal: React.FC<JoinModalProps> = ({ isOpen, onClose, projectTi
   return (
     <>
       <style>{`
-        .text-orientation-fix * {
-          writing-mode: horizontal-tb !important;
-          text-orientation: mixed !important;
-          direction: ltr !important;
-          unicode-bidi: normal !important;
-          -webkit-writing-mode: horizontal-tb !important;
-          -webkit-text-orientation: mixed !important;
-          -moz-writing-mode: horizontal-tb !important;
-          -ms-writing-mode: horizontal-tb !important;
-        }
+        /* Removed problematic text-orientation-fix rule that was breaking global layout */
         .modal-container {
           background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%);
           backdrop-filter: blur(20px);
