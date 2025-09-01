@@ -14,7 +14,7 @@ export async function POST(req: Request) {
                 pass: process.env.GMAIL_PASS,
             },
         });
-        //working 
+        //working now
         // Send email
         await transporter.sendMail({
             from: `"Mansa to Mansa" <${process.env.GMAIL_USER}>`,
