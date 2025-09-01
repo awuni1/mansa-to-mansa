@@ -82,6 +82,15 @@ export default function BecomeMemberForm() {
       setLoading(false);
       return;
     }
+    if (!error) {
+      // Call API route to send email
+      await fetch("/api/send-confirmation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: formData.name, email: formData.email }),
+      });
+
+    }
 
     const cleanedFormData = Object.fromEntries(
       Object.entries(formData).filter(([, v]) => v !== '' && v !== undefined)
@@ -263,7 +272,7 @@ export default function BecomeMemberForm() {
           animation: fadeIn 0.3s ease;
         }
       `}</style>
-      
+
       <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex justify-center items-center py-4 sm:py-8 px-2 sm:px-4">
         <div className="form-container p-4 sm:p-6 md:p-8 lg:p-12 rounded-xl sm:rounded-2xl shadow-2xl max-w-5xl w-full backdrop-blur-sm">
           {/* Header Section */}
@@ -420,29 +429,29 @@ export default function BecomeMemberForm() {
                   Professional Background
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 px-2 sm:px-0">
-                  <input 
-                    type="text" 
-                    name="industry" 
-                    placeholder="Industry/Field" 
-                    value={formData.industry} 
-                    onChange={handleChange} 
-                    className={inputStyle} 
+                  <input
+                    type="text"
+                    name="industry"
+                    placeholder="Industry/Field"
+                    value={formData.industry}
+                    onChange={handleChange}
+                    className={inputStyle}
                   />
-                  <input 
-                    type="text" 
-                    name="jobtitle" 
-                    placeholder="Current Job Title" 
-                    value={formData.jobtitle} 
-                    onChange={handleChange} 
-                    className={inputStyle} 
+                  <input
+                    type="text"
+                    name="jobtitle"
+                    placeholder="Current Job Title"
+                    value={formData.jobtitle}
+                    onChange={handleChange}
+                    className={inputStyle}
                   />
-                  <input 
-                    type="text" 
-                    name="experience" 
-                    placeholder="Years of Experience" 
-                    value={formData.experience} 
-                    onChange={handleChange} 
-                    className={inputStyle} 
+                  <input
+                    type="text"
+                    name="experience"
+                    placeholder="Years of Experience"
+                    value={formData.experience}
+                    onChange={handleChange}
+                    className={inputStyle}
                   />
                 </div>
               </div>
@@ -455,29 +464,29 @@ export default function BecomeMemberForm() {
                   Academic Information
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 px-2 sm:px-0">
-                  <input 
-                    type="text" 
-                    name="school" 
-                    placeholder="School/University Name" 
-                    value={formData.school} 
-                    onChange={handleChange} 
-                    className={inputStyle} 
+                  <input
+                    type="text"
+                    name="school"
+                    placeholder="School/University Name"
+                    value={formData.school}
+                    onChange={handleChange}
+                    className={inputStyle}
                   />
-                  <input 
-                    type="text" 
-                    name="level" 
-                    placeholder="Education Level" 
-                    value={formData.level} 
-                    onChange={handleChange} 
-                    className={inputStyle} 
+                  <input
+                    type="text"
+                    name="level"
+                    placeholder="Education Level"
+                    value={formData.level}
+                    onChange={handleChange}
+                    className={inputStyle}
                   />
-                  <input 
-                    type="text" 
-                    name="major" 
-                    placeholder="Field of Study" 
-                    value={formData.major} 
-                    onChange={handleChange} 
-                    className={inputStyle} 
+                  <input
+                    type="text"
+                    name="major"
+                    placeholder="Field of Study"
+                    value={formData.major}
+                    onChange={handleChange}
+                    className={inputStyle}
                   />
                 </div>
               </div>
@@ -490,13 +499,13 @@ export default function BecomeMemberForm() {
                   About You
                 </h3>
                 <div className="px-2 sm:px-0">
-                  <input 
-                    type="text" 
-                    name="occupation" 
-                    placeholder="Your Current Occupation" 
-                    value={formData.occupation} 
-                    onChange={handleChange} 
-                    className={inputStyle} 
+                  <input
+                    type="text"
+                    name="occupation"
+                    placeholder="Your Current Occupation"
+                    value={formData.occupation}
+                    onChange={handleChange}
+                    className={inputStyle}
                   />
                 </div>
               </div>
@@ -529,10 +538,10 @@ export default function BecomeMemberForm() {
             <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 animate-fadeIn">
               {/* Background */}
               <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowModal(false)}></div>
-              
+
               {/* Multi-Screen Responsive Modal Container */}
               <div className="relative z-10 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-10  animate-slideUp border border-gray-100 dark:border-gray-800">
-                
+
                 {/* Multi-Screen Close Button */}
                 <button
                   className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 lg:top-5 lg:right-5 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 rounded-full bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 flex items-center justify-center group hover:scale-110"
@@ -556,7 +565,7 @@ export default function BecomeMemberForm() {
                     <h1 className="text-base sm:text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent leading-tight">
                       Welcome to Mansa! 🎉
                     </h1>
-                    
+
                     <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed px-2 sm:px-0">
                       You&apos;re officially part of our community. Join WhatsApp to connect with  members.
                     </p>
@@ -577,25 +586,25 @@ export default function BecomeMemberForm() {
                       </span>
                     </a>
 
-              
 
-                   
 
-                  {/* Mobile-Friendly Footer */}
-                  <div className="pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-gray-100 dark:border-gray-800">
-                    <div className="flex items-center justify-center gap-2 sm:gap-3">
-                      <div className="flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                        <span className="text-[10px] sm:text-xs text-gray-400">Active</span>
+
+
+                    {/* Mobile-Friendly Footer */}
+                    <div className="pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-gray-100 dark:border-gray-800">
+                      <div className="flex items-center justify-center gap-2 sm:gap-3">
+                        <div className="flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                          <span className="text-[10px] sm:text-xs text-gray-400">Active</span>
+                        </div>
+                        <span className="text-gray-300 dark:text-gray-600">•</span>
+                        <span className="text-[10px] sm:text-xs text-gray-400">24/7 Support</span>
                       </div>
-                      <span className="text-gray-300 dark:text-gray-600">•</span>
-                      <span className="text-[10px] sm:text-xs text-gray-400">24/7 Support</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           )}
         </div>
       </main>
