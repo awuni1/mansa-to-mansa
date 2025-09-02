@@ -33,6 +33,8 @@ export async function POST(req: Request) {
     </ul>
 
     <p>We'll be in touch soon with more information about upcoming events and opportunities.</p>
+    <p>In the meantime, join our WhatsApp community to interact with members! 
+      <a href="https://chat.whatsapp.com/IhusxmHPhHuCjMWZrbSr2K?mode=ems_copy_t" target="_blank">Click here to join</a> if you haven't already.</p>
 
     <p>Best regards,<br>
     The Mansa to Mansa Team<br>
