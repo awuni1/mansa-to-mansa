@@ -15,21 +15,22 @@ export const metadata: Metadata = {
   description: "Building the Future, One Mansa at a Time",
   icons: {
     icon: [
-      { url: "/mansaa-favicon.png" },
-      { url: "/mansaa-favicon.png", sizes: "16x16", type: "image/png" },
-      { url: "/mansaa-favicon.png", sizes: "32x32", type: "image/png" },
+
+      // { url: "/faviconupdate.ico" },
+      // { url: "/mansaa-favicon.png", sizes: "16x16", type: "image/png" },
+      // { url: "/mansaa-favicon.png", sizes: "32x32", type: "image/png" },
     ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180" },
-    ],
-    other: [
-      { rel: "mask-icon", url: "/safari-pinned-tab.svg" },
-    ],
+    // apple: [
+    //   { url: "/apple-touch-icon.png", sizes: "180x180" },
+    // ],
+    // other: [
+    //   { rel: "mask-icon", url: "/safari-pinned-tab.svg" },
+    // ],
   },
-  manifest: "/site.webmanifest",
-  other: {
-    "msapplication-config": "/browserconfig.xml",
-  },
+  // manifest: "/site.webmanifest",
+  // other: {
+  //   "msapplication-config": "/browserconfig.xml",
+  // },
 };
 
 // ✅ Move themeColor here
