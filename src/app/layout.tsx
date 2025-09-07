@@ -13,26 +13,46 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Mansa-to-Mansa",
   description: "Building the Future, One Mansa at a Time",
+  manifest: '/manifest.json',
+  themeColor: '#ffffff',
   icons: {
     icon: [
-      { url: "/mansaa-favicon.png" },
-      { url: "/mansaa-favicon.png", sizes: "16x16", type: "image/png" },
-      { url: "/mansaa-favicon.png", sizes: "32x32", type: "image/png" },
+       
+      // { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      // { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/web-app-manifest-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180" },
-    ],
-    other: [
-      { rel: "mask-icon", url: "/safari-pinned-tab.svg" },
-    ],
+    apple: '/apple-touch-icon.png',
   },
-  manifest: "/site.webmanifest",
-  other: {
-    "msapplication-config": "/browserconfig.xml",
+  // manifest: "/site.webmanifest",
+  // other: {
+  //   "msapplication-config": "/browserconfig.xml",
+  // },
+  openGraph: {
+    title: 'Mansa-to-Mansa',
+    description: 'Connecting opportunities across communities.',
+    url: 'https://www.mansa-to-mansa.org',
+    siteName: 'Mansa-to-Mansa',
+    images: [
+      {
+        url: 'https://www.mansa-to-mansa.org/web-app-manifest-512x512whatsapp.png',
+        width: 512,
+        height: 512,
+        alt: 'Mansa-to-Mansa Logo',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mansa-to-Mansa',
+    description: 'Connecting opportunities across communities.',
+    images: ['https://www.mansa-to-mansa.org/android-chrome-512x512.png'],
   },
 };
 
-// ✅ Move themeColor here
+
 export const viewport: Viewport = {
   themeColor: "#ffffff",
 };

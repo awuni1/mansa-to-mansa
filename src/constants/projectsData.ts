@@ -166,5 +166,18 @@ export const futureProjects: FutureProject[] = [
     launchDate: "Q3 2025",
     imageUrl: "/SECURITY.jpeg",
     tags: ["IoT", "Computer Vision", "Security"]
-  }
+  },
+  {
+  id: 15,
+  title: "Sustainable Transportation & Supply Chain Management",
+  description: "A project focused on improving transportation networks and supply chain systems through digital platforms, data-driven planning, and sustainable practices.",
+  status: "Planning",
+  participants: "Logistics & Operations Teams",
+  location: "Ghana",
+  launchDate: "Q4 2025",
+  imageUrl: "/cargo.jpg",
+  tags: ["Transportation", "Supply Chain", "Sustainability", "Logistics"]
+}
+
+
 ];
