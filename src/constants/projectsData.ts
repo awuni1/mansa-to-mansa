@@ -4,6 +4,7 @@ import { Project, FutureProject } from '@/types/projects';
 export const ongoingProjects: Project[] = [];
 // Currently empty - add ongoing projects here when available
 
+
 export const futureProjects: FutureProject[] = [
   
  

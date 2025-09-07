@@ -299,18 +299,19 @@ const JoinProjectModal: React.FC<JoinModalProps> = ({ isOpen, onClose, projectTi
     }
   };
 
-  const checkExistingApplication = async (email: string): Promise<{hasApplied: boolean, projectTitle?: string}> => {
+  const checkExistingApplication = async (email: string, projectId: number): Promise<{hasApplied: boolean, projectTitle?: string}> => {
     try {
-      console.log('Checking if user has applied to ANY project:', email);
+      console.log('Checking if user has applied to this specific project:', email, 'Project ID:', projectId);
       
       // Dynamic import to avoid SSR issues
       const { supabase } = await import('@/lib/supabase');
       
-      // Check if user has applied to ANY project, not just this one
+      // Check if user has applied to THIS SPECIFIC project only
       const { data, error } = await supabase
         .from('project_applications')
         .select('id, status, applied_date, project_id')
-        .eq('applicant_email', email.toLowerCase());
+        .eq('applicant_email', email.toLowerCase())
+        .eq('project_id', projectId);
 
       console.log('Application check response:', { data, error });
 
@@ -320,17 +321,13 @@ const JoinProjectModal: React.FC<JoinModalProps> = ({ isOpen, onClose, projectTi
       }
 
       const hasApplied = data && data.length > 0;
-      console.log('Has already applied to any project:', hasApplied);
+      console.log('Has already applied to this specific project:', hasApplied);
       
       if (hasApplied && data && data.length > 0) {
-        // Get project title for the existing application
-        const existingProjectId = data[0].project_id;
-        console.log('User already applied to project ID:', existingProjectId);
-        
         // Find project title from our project data
         const allProjects = [...ongoingProjects, ...futureProjects];
-        const existingProject = allProjects.find(p => p.id === existingProjectId);
-        const projectTitle = existingProject?.title || `Project ${existingProjectId}`;
+        const existingProject = allProjects.find(p => p.id === projectId);
+        const projectTitle = existingProject?.title || `Project ${projectId}`;
         
         return { hasApplied: true, projectTitle };
       }
@@ -372,11 +369,11 @@ const JoinProjectModal: React.FC<JoinModalProps> = ({ isOpen, onClose, projectTi
 
       console.log('User is a member, proceeding with application check...');
 
-      // Check if user has already applied to ANY project
-      const applicationCheck = await checkExistingApplication(formData.email);
+      // Check if user has already applied to THIS SPECIFIC project
+      const applicationCheck = await checkExistingApplication(formData.email, projectId);
       if (applicationCheck.hasApplied) {
-        const existingProjectName = applicationCheck.projectTitle || 'another project';
-        setErrorMessage(`You have already applied to "${existingProjectName}". Each user can only join one project. Check your email for updates on your application status.`);
+        const projectName = applicationCheck.projectTitle || projectTitle;
+        setErrorMessage(`You have already applied to "${projectName}". You cannot apply to the same project twice. Check your email for updates on your application status.`);
         setStep('already_applied');
         setLoading(false);
         return;
@@ -514,7 +511,7 @@ const JoinProjectModal: React.FC<JoinModalProps> = ({ isOpen, onClose, projectTi
                 {projectTitle}
               </h4>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-2">
-                Ready to make an impact? Fill out the form below to join this exciting project.
+                Ready to make an impact? Fill out the form below to join this exciting project. You can apply to multiple projects!
               </p>
               <div className="text-sm sm:text-base text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg sm:rounded-xl p-4 sm:p-6 mx-2 sm:mx-0">
                 <div className="flex items-center justify-center space-x-2 sm:space-x-3 mb-2 sm:mb-3">
@@ -660,7 +657,7 @@ const JoinProjectModal: React.FC<JoinModalProps> = ({ isOpen, onClose, projectTi
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed text-sm sm:text-base">
                 Thank you for your interest in <strong className="text-gray-900 dark:text-white">{projectTitle}</strong>. 
-                Our team will review your application and contact you within 5-7 business days.
+                Our team will review your application and contact you within 5-7 business days. Feel free to apply to other projects as well!
               </p>
               <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/10 dark:to-gray-800 border border-green-200 dark:border-green-800 rounded-xl p-6 mb-6">
                 <h4 className="font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center">
@@ -669,6 +666,7 @@ const JoinProjectModal: React.FC<JoinModalProps> = ({ isOpen, onClose, projectTi
                 </h4>
                 <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-2 text-left">
                   <li className="flex items-center"><IoCheckmarkCircle className="mr-2 text-green-500 flex-shrink-0" />Check your email for confirmation</li>
+                  <li className="flex items-center"><IoCheckmarkCircle className="mr-2 text-green-500 flex-shrink-0" />Consider applying to other projects you&apos;re interested in</li>
                   <li className="flex items-center"><IoCheckmarkCircle className="mr-2 text-green-500 flex-shrink-0" />Stay connected with our community updates</li>
                   <li className="flex items-center"><IoCheckmarkCircle className="mr-2 text-green-500 flex-shrink-0" />Follow project progress on our platforms</li>
                 </ul>
@@ -691,7 +689,7 @@ const JoinProjectModal: React.FC<JoinModalProps> = ({ isOpen, onClose, projectTi
                 <IoWarning className="text-2xl sm:text-3xl text-white" />
               </div>
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-orange-600 dark:text-orange-400 mb-3 sm:mb-4 px-2">
-                Already Applied to Project
+                Already Applied to This Project
               </h3>
               <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-xl p-4 mb-6 mx-2 sm:mx-0">
                 <p className="text-orange-700 dark:text-orange-400 text-sm sm:text-base leading-relaxed">
